@@ -1,0 +1,1565 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <meta name="theme-color" content="#100d0c">
+
+    <meta name="description"
+          content="Explore wine quality through machine learning, chemistry and intelligent classification.">
+
+    <title>Wine Intelligence Lab — The Art of Wine Intelligence</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+          rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"
+            defer></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+            defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+            defer></script>
+
+    <!-- Main JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"
+            defer></script>
+
+    <!-- Hero arrow positioning -->
+    <style>
+        .hero {
+            position: relative;
+            min-height: 760px;
+            height: min(900px, 100svh);
+            overflow: hidden;
+        }
+
+        .hero-arrow {
+            position: absolute !important;
+            left: 50% !important;
+            bottom: 38px !important;
+            top: auto !important;
+            transform: translateX(-50%) !important;
+            z-index: 10;
+            display: grid;
+            place-items: center;
+        }
+
+        .hero-arrow:hover {
+            transform: translate(-50%, 4px) !important;
+        }
+
+        .hero-bottom {
+            display: block;
+            position: relative;
+        }
+
+        .hero-description {
+            max-width: 390px;
+        }
+
+        @media (max-width: 700px) {
+            .hero {
+                min-height: 760px;
+                height: 100svh;
+            }
+
+            .hero-arrow {
+                bottom: 48px !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-arrow {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- ======================================
+         PAGE GRAIN
+    ======================================= -->
+
+    <div class="grain" aria-hidden="true"></div>
+
+
+    <!-- ======================================
+         LOADER
+    ======================================= -->
+
+    <div class="loader" id="loader">
+
+        <span class="loader-mark">WI</span>
+
+        <span class="loader-line"></span>
+
+        <small>PREPARING THE EXPERIENCE</small>
+
+    </div>
+
+
+    <!-- ======================================
+         HEADER / NAVIGATION
+    ======================================= -->
+
+    <header class="topbar">
+
+        <a class="brand"
+           href="#home"
+           aria-label="Wine Intelligence Lab home">
+
+            <span class="brand-mark">
+                W<span>I</span>
+            </span>
+
+            <span class="brand-name">
+                WINE INTELLIGENCE
+                <small>THE ART OF CLASSIFICATION</small>
+            </span>
+
+        </a>
+
+
+        <nav class="desktop-nav"
+             aria-label="Main navigation">
+
+            <a href="#story">THE STORY</a>
+
+            <a href="#insights">INSIGHTS</a>
+
+            <a href="#atelier">THE ATELIER</a>
+
+        </nav>
+
+
+        <a class="nav-cta" href="#atelier">
+
+            EXPLORE THE MODEL
+
+            <span>↗</span>
+
+        </a>
+
+
+        <button class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation"
+                aria-expanded="false">
+
+            <i></i>
+            <i></i>
+
+        </button>
+
+    </header>
+
+
+    <!-- MOBILE MENU -->
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="#story">The story</a>
+
+        <a href="#insights">Insights</a>
+
+        <a href="#atelier">The atelier</a>
+
+    </div>
+
+
+
+    <main>
+
+
+        <!-- ======================================
+             01. HERO SECTION
+        ======================================= -->
+
+        <section class="hero" id="home">
+
+
+            <!-- Background orbits -->
+
+            <div class="hero-orbit orbit-one"></div>
+
+            <div class="hero-orbit orbit-two"></div>
+
+
+            <!-- Main heading -->
+
+            <div class="hero-copy">
+
+                <p class="eyebrow reveal">
+
+                    <span class="eyebrow-line"></span>
+
+                    A STUDY IN TASTE & TECHNOLOGY
+
+                    · EST. 2026
+
+                </p>
+
+
+                <h1 class="hero-title">
+
+                    <span class="title-line">
+                        The Art of
+                    </span>
+
+                    <span class="title-line title-italic">
+                        Wine
+                    </span>
+
+                    <span class="title-line title-outline">
+                        Intelligence<span class="title-period">.</span>
+                    </span>
+
+                </h1>
+
+
+                <div class="hero-bottom">
+
+                    <p class="hero-description">
+
+                        Where the language of the vineyard
+                        meets the precision of machine learning.
+
+                        A new perspective on what makes
+                        a wine memorable.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Artistic wine bottle -->
+
+            <div class="hero-art" aria-hidden="true">
+
+                <div class="halo"></div>
+
+                <div class="wine-shadow"></div>
+
+
+                <svg class="bottle"
+                     viewBox="0 0 300 700"
+                     role="presentation">
+
+                    <defs>
+
+                        <linearGradient id="glass"
+                                        x1="0"
+                                        x2="1">
+
+                            <stop stop-color="#26110f"/>
+
+                            <stop offset=".22"
+                                  stop-color="#7c4137"/>
+
+                            <stop offset=".48"
+                                  stop-color="#3d1718"/>
+
+                            <stop offset=".76"
+                                  stop-color="#9a5b48"/>
+
+                            <stop offset="1"
+                                  stop-color="#24100f"/>
+
+                        </linearGradient>
+
+
+                        <linearGradient id="foil"
+                                        x1="0"
+                                        x2="1">
+
+                            <stop stop-color="#8e6c38"/>
+
+                            <stop offset=".35"
+                                  stop-color="#e1c58b"/>
+
+                            <stop offset=".7"
+                                  stop-color="#9b773d"/>
+
+                            <stop offset="1"
+                                  stop-color="#594020"/>
+
+                        </linearGradient>
+
+
+                        <linearGradient id="label"
+                                        x1="0"
+                                        x2="1">
+
+                            <stop stop-color="#c9b89b"/>
+
+                            <stop offset=".5"
+                                  stop-color="#f0e6d5"/>
+
+                            <stop offset="1"
+                                  stop-color="#b9a589"/>
+
+                        </linearGradient>
+
+                    </defs>
+
+
+                    <!-- Bottle body -->
+
+                    <path
+                        d="M116 30 Q116 18 128 18 H172 Q184 18 184 30 V105 Q184 135 198 164 C218 205 238 254 239 317 L253 624 Q255 666 215 672 H85 Q45 666 47 624 L61 317 C62 254 82 205 102 164 Q116 135 116 105Z"
+
+                        fill="url(#glass)"
+
+                        stroke="#b78368"
+
+                        stroke-opacity=".55"
+
+                        stroke-width="2"
+                    />
+
+
+                    <!-- Bottle neck -->
+
+                    <path
+                        d="M116 28 H184 V105 H116Z"
+
+                        fill="url(#foil)"
+                    />
+
+
+                    <path
+                        d="M117 48 H183"
+
+                        stroke="#f2d9a7"
+
+                        opacity=".5"
+                    />
+
+
+                    <!-- Bottle label -->
+
+                    <path
+                        d="M70 350 Q150 330 230 350 L239 614 Q240 643 213 647 H87 Q60 643 61 614Z"
+
+                        fill="url(#label)"
+
+                        opacity=".96"
+                    />
+
+
+                    <path
+                        d="M85 380 Q150 365 215 380"
+
+                        stroke="#7b4c3c"
+
+                        stroke-width="1"
+
+                        opacity=".5"
+                    />
+
+
+                    <text
+                        x="150"
+                        y="435"
+                        text-anchor="middle"
+                        fill="#49251f"
+                        font-family="Georgia"
+                        font-size="16"
+                        letter-spacing="5">
+
+                        WINE
+
+                    </text>
+
+
+                    <text
+                        x="150"
+                        y="485"
+                        text-anchor="middle"
+                        fill="#49251f"
+                        font-family="Georgia"
+                        font-size="42">
+
+                        LAB
+
+                    </text>
+
+
+                    <text
+                        x="150"
+                        y="515"
+                        text-anchor="middle"
+                        fill="#765143"
+                        font-family="Georgia"
+                        font-size="9"
+                        letter-spacing="3">
+
+                        VINTAGE · 2026
+
+                    </text>
+
+
+                    <path
+                        d="M74 175 Q58 280 67 600"
+
+                        stroke="#e4b6a1"
+
+                        stroke-width="8"
+
+                        opacity=".13"
+
+                        fill="none"
+                    />
+
+                </svg>
+
+
+                <div class="art-caption">
+
+                    <span>01 / 03</span>
+
+                    <span>THE CHARACTER OF WINE</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Side note -->
+
+            <div class="hero-side-note">
+
+                A DIGITAL CELLAR — 2026
+
+            </div>
+
+
+            <!-- Scroll indicator -->
+
+            <a href="#story"
+               class="round-link hero-arrow"
+               aria-label="Scroll down to explore the story">
+
+                <span aria-hidden="true">↓</span>
+
+            </a>
+
+
+            <div class="hero-scroll">
+
+                SCROLL TO DISCOVER
+
+                <span></span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             02. ABOUT / PHILOSOPHY
+        ======================================= -->
+
+        <section class="intro section-pad" id="story">
+
+
+            <div class="section-kicker reveal">
+
+                <span>01</span>
+
+                <span>THE PHILOSOPHY</span>
+
+            </div>
+
+
+            <div class="intro-grid">
+
+
+                <p class="intro-label reveal">
+
+                    BEYOND THE
+
+                    <br>
+
+                    FIRST IMPRESSION
+
+                </p>
+
+
+                <div class="intro-content reveal">
+
+
+                    <h2>
+
+                        Every bottle tells
+
+                        <br>
+
+                        a story. <em>We read</em>
+
+                        <br>
+
+                        between the notes.
+
+                    </h2>
+
+
+                    <div class="intro-foot">
+
+
+                        <p>
+
+                            Wine quality is shaped by a delicate
+                            balance of chemistry: acidity,
+                            residual sugar, chlorides and the
+                            quiet influence of alcohol.
+
+                            We bring these signals together
+                            through a trained classification
+                            model — translating measured
+                            characteristics into an informed
+                            quality category.
+
+                        </p>
+
+
+                        <span class="signature">
+
+                            A more considered taste.
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Moving typography -->
+
+            <div class="marquee" aria-hidden="true">
+
+                <div>
+
+                    TERROIR · BALANCE · CHARACTER ·
+                    TERROIR · BALANCE · CHARACTER ·
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             03. DATASET & ANALYTICS
+        ======================================= -->
+
+        <section class="insights section-pad" id="insights">
+
+
+            <div class="section-kicker reveal">
+
+                <span>02</span>
+
+                <span>THE COLLECTION / DATASET</span>
+
+            </div>
+
+
+            <div class="section-heading reveal">
+
+
+                <h2>
+
+                    A cellar of
+
+                    <br>
+
+                    <em>6,000+ stories.</em>
+
+                </h2>
+
+
+                <p>
+
+                    Patterns drawn from a real collection
+                    of Portuguese Vinho Verde samples.
+
+                    Cleaned using the same duplicate
+                    and missing-value removal sequence
+                    documented in the supplied notebook.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- Dataset statistics -->
+
+            <div class="stat-grid">
+
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+
+                        01 / RECORDS
+
+                    </span>
+
+                    <strong data-count="records">—</strong>
+
+                    <small>USABLE SAMPLES</small>
+
+                </article>
+
+
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+
+                        02 / VARIABLES
+
+                    </span>
+
+                    <strong data-count="features">—</strong>
+
+                    <small>MODEL INPUT FEATURES</small>
+
+                </article>
+
+
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+
+                        03 / HIGH QUALITY
+
+                    </span>
+
+                    <strong data-count="high_quality_pct">—</strong>
+
+                    <small>OF CLEANED SAMPLES</small>
+
+                </article>
+
+
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+
+                        04 / COLLECTION
+
+                    </span>
+
+                    <strong>
+
+                        <span data-count="red_wine">—</span>
+
+                        <small class="stat-plus"> / </small>
+
+                        <span data-count="white_wine">—</span>
+
+                    </strong>
+
+                    <small>RED / WHITE SAMPLES</small>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- Quality and alcohol charts -->
+
+            <div class="chart-layout">
+
+
+                <article class="chart-panel chart-large reveal">
+
+
+                    <div class="panel-top">
+
+                        <div>
+
+                            <span class="panel-kicker">
+
+                                THE DISTRIBUTION
+
+                            </span>
+
+                            <h3>Quality, in balance</h3>
+
+                        </div>
+
+                        <span class="chart-number">
+
+                            A / 01
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-wrap">
+
+                        <canvas
+                            id="qualityChart"
+                            aria-label="Wine quality distribution chart">
+                        </canvas>
+
+                    </div>
+
+
+                    <p class="chart-note">
+
+                        Original quality scores present
+                        in the cleaned dataset.
+
+                        The classifier groups scores into
+                        two classes at the threshold of 6.
+
+                    </p>
+
+                </article>
+
+
+
+                <article class="chart-panel reveal">
+
+
+                    <div class="panel-top">
+
+                        <div>
+
+                            <span class="panel-kicker">
+
+                                THE SPIRIT
+
+                            </span>
+
+                            <h3>Alcohol profile</h3>
+
+                        </div>
+
+                        <span class="chart-number">
+
+                            A / 02
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-wrap chart-wrap-short">
+
+                        <canvas
+                            id="alcoholChart"
+                            aria-label="Alcohol distribution chart">
+                        </canvas>
+
+                    </div>
+
+
+                    <p class="chart-note">
+
+                        Sample counts grouped into
+                        alcohol percentage bands.
+
+                    </p>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- Acidity and correlation -->
+
+            <div class="chart-layout chart-layout-second">
+
+
+                <article class="chart-panel reveal">
+
+
+                    <div class="panel-top">
+
+                        <div>
+
+                            <span class="panel-kicker">
+
+                                THE STRUCTURE
+
+                            </span>
+
+                            <h3>Acidity signatures</h3>
+
+                        </div>
+
+                        <span class="chart-number">
+
+                            A / 03
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-wrap chart-wrap-short">
+
+                        <canvas
+                            id="acidityChart"
+                            aria-label="Median acidity values chart">
+                        </canvas>
+
+                    </div>
+
+
+                    <p class="chart-note">
+
+                        Median values for selected acidity
+                        measures. Values retain their
+                        original units.
+
+                    </p>
+
+                </article>
+
+
+
+                <article class="chart-panel reveal">
+
+
+                    <div class="panel-top">
+
+                        <div>
+
+                            <span class="panel-kicker">
+
+                                THE RELATIONSHIPS
+
+                            </span>
+
+                            <h3>Feature correlation</h3>
+
+                        </div>
+
+                        <span class="chart-number">
+
+                            A / 04
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- JS generates the complete labelled matrix -->
+
+                    <div id="heatmap"
+                         class="heatmap-host"
+                         aria-label="Feature correlation heatmap"
+                         role="region">
+
+                    </div>
+
+
+                    <p class="chart-note">
+
+                        Pearson correlation across
+                        the eight model input features.
+
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             04. CINEMATIC INTERLUDE
+        ======================================= -->
+
+        <section class="interlude">
+
+
+            <div class="interlude-image">
+
+
+                <div class="interlude-glow"></div>
+
+
+                <span class="interlude-vertical">
+
+                    SCIENCE, WITH A SENSE OF WONDER
+
+                </span>
+
+
+                <div class="interlude-quote">
+
+                    “Precision is
+
+                    <br>
+
+                    its own kind
+
+                    <br>
+
+                    of <em>poetry.</em>”
+
+                </div>
+
+
+                <span class="interlude-foot">
+
+                    THE WINE INTELLIGENCE PRINCIPLE — Nº 01
+
+                </span>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             05. LIVE PREDICTION / ATELIER
+        ======================================= -->
+
+        <section class="atelier section-pad" id="atelier">
+
+
+            <div class="section-kicker reveal">
+
+                <span>03</span>
+
+                <span>THE TASTING ROOM / LIVE CLASSIFICATION</span>
+
+            </div>
+
+
+
+            <div class="atelier-heading reveal">
+
+
+                <div>
+
+                    <p class="panel-kicker">
+
+                        YOUR MOMENT OF DISCOVERY
+
+                    </p>
+
+
+                    <h2>
+
+                        Compose your
+
+                        <br>
+
+                        <em>wine profile.</em>
+
+                    </h2>
+
+                </div>
+
+
+                <p>
+
+                    Adjust the eight chemical
+                    characteristics below.
+
+                    The original trained model and its
+                    saved scaler will classify your
+                    composition.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="tasting-layout">
+
+
+                <!-- ==================================
+                     PREDICTION FORM
+                =================================== -->
+
+                <form class="tasting-form reveal"
+                      id="predictionForm"
+                      autocomplete="off">
+
+
+                    <div class="form-head">
+
+                        <span>THE COMPOSITION</span>
+
+                        <span>08 PARAMETERS</span>
+
+                    </div>
+
+
+
+                    <!--
+                        IMPORTANT:
+                        Feature names, input order, limits
+                        and default values come dynamically
+                        from Flask.
+                    -->
+
+                    <div class="field-grid">
+
+
+                        {% for feature in features %}
+
+
+                        <label class="field"
+                               data-feature="{{ feature }}">
+
+
+                            <span class="field-top">
+
+
+                                <span>
+
+                                    {{ feature|replace('_',' ')|title }}
+
+                                </span>
+
+
+                                <small>
+
+                                    {{ "%.3g"|format(feature_stats[feature].min) }}
+
+                                    —
+
+                                    {{ "%.3g"|format(feature_stats[feature].max) }}
+
+                                </small>
+
+
+                            </span>
+
+
+
+                            <!-- Numerical input -->
+
+                            <span class="input-line">
+
+
+                                <input
+
+                                    type="number"
+
+                                    name="{{ feature }}"
+
+                                    min="{{ feature_stats[feature].min }}"
+
+                                    max="{{ feature_stats[feature].max }}"
+
+                                    step="any"
+
+                                    value="{{ feature_stats[feature].median }}"
+
+                                    required
+
+                                >
+
+
+                                <span class="field-unit">
+
+
+                                    {% if feature == 'alcohol' %}
+
+                                        % vol
+
+                                    {% elif 'sulfur' in feature %}
+
+                                        mg/L
+
+                                    {% elif feature == 'pH' %}
+
+                                        pH
+
+                                    {% else %}
+
+                                        g/L
+
+                                    {% endif %}
+
+
+                                </span>
+
+
+                            </span>
+
+
+
+                            <!-- Range slider -->
+
+                            <input
+
+                                class="range"
+
+                                type="range"
+
+                                min="{{ feature_stats[feature].min }}"
+
+                                max="{{ feature_stats[feature].max }}"
+
+                                step="{{ (feature_stats[feature].max - feature_stats[feature].min) / 500 }}"
+
+                                value="{{ feature_stats[feature].median }}"
+
+                                aria-label="{{ feature }} slider"
+
+                            >
+
+
+                        </label>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+
+                    <!-- Form actions -->
+
+                    <div class="form-actions">
+
+
+                        <button class="submit-button"
+                                type="submit">
+
+                            <span>REVEAL THE PROFILE</span>
+
+                            <b>↗</b>
+
+                        </button>
+
+
+
+                        <button class="reset-button"
+                                type="reset">
+
+                            RESET TO MEDIAN ↺
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <p class="form-disclaimer">
+
+                        Inputs are validated against the
+                        observed range in the supplied
+                        dataset.
+
+                        Classification is an educational
+                        model output, not a professional
+                        tasting assessment.
+
+                    </p>
+
+
+                </form>
+
+
+
+                <!-- ==================================
+                     PREDICTION RESULT
+                =================================== -->
+
+                <aside class="result-panel reveal"
+                       id="resultPanel">
+
+
+                    <div class="result-top">
+
+                        <span class="panel-kicker">
+
+                            THE VERDICT
+
+                        </span>
+
+
+                        <span class="live-dot">
+
+                            MODEL LIVE
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Default state -->
+
+                    <div class="result-placeholder"
+                         id="resultPlaceholder">
+
+
+                        <div class="result-emblem">
+
+                            ✳
+
+                        </div>
+
+
+                        <p>
+
+                            A profile is waiting
+
+                            <br>
+
+                            to be <em>discovered.</em>
+
+                        </p>
+
+
+                        <small>
+
+                            ENTER YOUR PARAMETERS
+
+                            <br>
+
+                            TO BEGIN THE TASTING
+
+                        </small>
+
+
+                    </div>
+
+
+
+                    <!-- Prediction output -->
+
+                    <div class="result-content"
+                         id="resultContent"
+                         hidden>
+
+
+                        <span class="result-overline">
+
+                            YOUR WINE IS CLASSIFIED AS
+
+                        </span>
+
+
+                        <h3 id="resultLabel">
+
+                            High quality
+
+                        </h3>
+
+
+                        <div class="result-rule"></div>
+
+
+                        <p id="resultDescription"></p>
+
+
+
+                        <!-- Confidence -->
+
+                        <div class="confidence-row">
+
+                            <span>MODEL CLASS PROBABILITY</span>
+
+                            <strong id="resultConfidence">
+
+                                —
+
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="confidence-track">
+
+                            <span id="confidenceBar"></span>
+
+                        </div>
+
+
+
+                        <span class="result-model">
+
+                            POWERED BY {{ model_name }}
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <!-- API error -->
+
+                    <div class="result-error"
+                         id="resultError"
+                         hidden
+                         role="alert">
+
+                    </div>
+
+
+
+                    <div class="result-foot">
+
+                        <span>WINE INTELLIGENCE / ML LAB</span>
+
+                        <span>NO. 2026 — 01</span>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             06. MODEL INFORMATION
+        ======================================= -->
+
+        <section class="model-note section-pad">
+
+
+            <div class="section-kicker reveal">
+
+                <span>04</span>
+
+                <span>THE METHOD</span>
+
+            </div>
+
+
+
+            <div class="method-grid">
+
+
+                <div class="method-title reveal">
+
+
+                    <p class="panel-kicker">
+
+                        A MEASURED APPROACH
+
+                    </p>
+
+
+                    <h2>
+
+                        Intuition,
+
+                        <br>
+
+                        meet <em>intelligence.</em>
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div class="method-details reveal">
+
+
+                    <div class="method-row">
+
+                        <span>ALGORITHM</span>
+
+                        <strong>{{ model_name }}</strong>
+
+                    </div>
+
+
+
+                    <div class="method-row">
+
+                        <span>TEST ACCURACY</span>
+
+                        <strong>75.54%</strong>
+
+                    </div>
+
+
+
+                    <div class="method-row">
+
+                        <span>TEST F1-SCORE</span>
+
+                        <strong>0.8105</strong>
+
+                    </div>
+
+
+
+                    <div class="method-row">
+
+                        <span>TEST SAMPLES</span>
+
+                        <strong>1,059</strong>
+
+                    </div>
+
+
+
+                    <p class="method-caveat">
+
+                        Metrics are taken from the saved
+                        notebook's recorded evaluation output.
+
+                        The model is a binary classifier:
+
+                        quality score ≥ 6 is “High quality”;
+
+                        below 6 is “Lower quality”.
+
+                        KNN does not expose native feature-
+                        importance scores, so none are
+                        fabricated here.
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ======================================
+         07. FOOTER
+    ======================================= -->
+
+    <footer class="footer">
+
+
+        <a class="brand footer-brand"
+           href="#home">
+
+
+            <span class="brand-mark">
+
+                W<span>I</span>
+
+            </span>
+
+
+            <span class="brand-name">
+
+                WINE INTELLIGENCE
+
+                <small>THE ART OF CLASSIFICATION</small>
+
+            </span>
+
+
+        </a>
+
+
+
+        <p>
+
+            THE ART OF WINE INTELLIGENCE
+
+        </p>
+
+
+
+        <a href="#home" class="back-top">
+
+            BACK TO TOP ↑
+
+        </a>
+
+
+
+        <div class="footer-bottom">
+
+
+            <span>
+
+                AN EXPERIMENT IN DATA & TASTE
+
+            </span>
+
+
+            <span>
+
+                © 2026 WINE INTELLIGENCE LAB
+
+            </span>
+
+
+        </div>
+
+
+    </footer>
+
+
+</body>
+
+</html>
